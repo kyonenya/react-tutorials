@@ -1,3 +1,3 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-ReactDOM.render(<h1>こんにちは、世界</h1>, document.getElementById('root'));
+ReactDOM.render(<h2>こんにちは、世界</h2>, document.getElementById('root'));
