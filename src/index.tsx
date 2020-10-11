@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-// 6. 関数コンポーネント
-// propsにはタイプエイリアスで型を付ける
+// ■ 6-9. 関数コンポーネントとprops
+// TS：propsにはタイプエイリアスで型を付ける
 type CounterProps = {
   color: string
 }
 
-// functionで定義する
-function Counter(props: CounterProps) {  // 7. 渡ってきたpropsを吸い上げる
+function Counter_function(props: CounterProps) {  // 7. 渡ってきたpropsを吸い上げる
   // クリックイベント
   const clicked = (color: string) => {
     alert(color);
@@ -22,6 +20,44 @@ function Counter(props: CounterProps) {  // 7. 渡ってきたpropsを吸い上�
   >
     0
   </li>;
+}
+
+
+// ■ 10-13. クラスコンポーネントとstate
+type CounterClassProps = {
+  color: string;
+}
+// TS：<Props, State>の型をジェネリクスとして設定する
+class Counter extends React.Component<CounterClassProps, {count: number}> {
+  // 11. Stateをコンストラクターで定義する
+  constructor(props: CounterClassProps) {
+    super(props);  // 親クラスのprops受け取りも定義し直す
+    // stateをオブジェクトとして保持する
+    this.state = {
+      count: 0
+    }
+  }
+  countUp = () => {
+    // 13. setState stateはカプセル化されているため
+    this.setState(prevState => {  // 第一引数に直前の状態をとる
+      return {  // stateオブジェクトを丸ごと返す
+        count: prevState.count + 1,
+      };
+    });
+    // setStateされるたびごとにrenderメソッドが走る
+  }
+ 
+  // JSXは直接リターンせず、renderメソッドで返す
+  render = () => {
+    return <li
+      // thisでpropsを指定する
+      // propsは親クラスのReact.Componenクラスに渡されている
+      style={{backgroundColor: this.props.color}}
+      onClick={this.countUp}
+    >
+      {this.state.count}
+    </li>;
+  }
 }
 
 ReactDOM.render(
@@ -37,7 +73,7 @@ ReactDOM.render(
 );
 
 
-// 4-5. JSXの基本
+// ■ 4-5. JSXの基本
 const name = '隆史';
 const showMessage = () => {
   alert('こんにちは');
@@ -54,5 +90,5 @@ ReactDOM.render(
     // JavaScriptの式は波括弧で埋め込む
     {name}
   </div>,
-  document.getElementById('foo')
+  document.getElementById('root1')
 );
