@@ -2,35 +2,55 @@ body {
   font-size: 16px;
   font-family: Verdana, sans-serif;
 }
+
 .container {
-  width: 330px;
-  margin: 20px auto;
+  width: 300px;
+  margin: auto;
 }
+
+.container h1 {
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+  padding: 16px 0;
+}
+
 .container ul {
-  list-style: none;
-  margin: 0;
   padding: 0;
-  display: flex;
-  /* flex-wrap: wrap; */
+  list-style: none;
 }
+
 .container li {
-  width: 100px;
-  height: 100px;
-  line-height: 100px; /* これで縦方向の中央揃え */
-  text-align: center;
-  user-select: none;  /* 連打しても選択されない */
+  line-height: 1.5;
+}
+
+.container input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.cmd {
+  font-size: 12px;
   cursor: pointer;
-  border-radius: 5px;
-  margin: 0 5px 10px;
+  color: #08c;
+  margin-left: 5px;
 }
-.container div {
-  text-align: right;
-  font-weight: bold;
-  padding: 5px;
-  font-weight: bold;
+
+.container input[type="text"] {
+  padding: 2px;
+  margin-right: 5px;
 }
-.box {
-  width: 100px;
-  height: 100px;
-  background-color: skyblue;
+
+h1 > span {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: normal;
+  margin-left: 5px;
+}
+
+h1 > button {
+  float: right;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #ccc;
 }

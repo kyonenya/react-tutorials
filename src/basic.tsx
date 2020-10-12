@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-// ■ 6-9. 関数コンポーネントとprops
 // TS：propsにはタイプエイリアスで型を付ける
-type CounterProps = {
+type CounterFunctionProps = {
   color: string
 }
 
-function Counter_function(props: CounterProps) {  // 7. 渡ってきたpropsを吸い上げる
+// ■hooksを使う（ステートフック）
+const Counter = (props: CounterFunctionProps) => {
+  // [現在のstateの値, それを更新するための関数] = useState(初期値);
+  const [count, setCount] = useState(0);
+  
+  return <li
+      style={{backgroundColor: props.color}}
+      // 更新した値をsetCountの引数に渡す
+      // 第一引数にprevStateをとる
+      onClick={() => setCount(count => count + 1)}
+    >
+      {count}
+    </li>;
+}
+
+// ■ 6-9. 関数コンポーネントとprops
+function Counter_function(props: CounterFunctionProps) {  // 7. 渡ってきたpropsを吸い上げる
   // クリックイベント
   const clicked = (color: string) => {
     alert(color);
@@ -28,7 +43,7 @@ type CounterClassProps = {
   color: string;
 }
 // TS：<Props, State>の型をジェネリクスとして設定する
-class Counter extends React.Component<CounterClassProps, {count: number}> {
+class Counter_class extends React.Component<CounterClassProps, {count: number}> {
   // 11. Stateをコンストラクターで定義する
   constructor(props: CounterClassProps) {
     super(props);  // 親クラスのprops受け取りも定義し直す
@@ -37,6 +52,7 @@ class Counter extends React.Component<CounterClassProps, {count: number}> {
       count: 0
     }
   }
+  
   countUp = () => {
     // 13. setState stateはカプセル化されているため
     this.setState(prevState => {  // 第一引数に直前の状態をとる
@@ -46,7 +62,7 @@ class Counter extends React.Component<CounterClassProps, {count: number}> {
     });
     // setStateされるたびごとにrenderメソッドが走る
   }
- 
+  
   // JSXは直接リターンせず、renderメソッドで返す
   render = () => {
     return <li
