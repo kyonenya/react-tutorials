@@ -4,11 +4,20 @@ import ReactDOM from 'react-dom';
 import { todosModel, todoModelable } from './todosModel';
 import { TodoList } from './TodoList';
 
+// 呼び出し可能オブジェクトによって関数に型付けする
+export interface checkTodoable {
+  (todo: todoModelable): void;
+}
+
+/**
+ * 
+ * 
+ * @state todos: {id, title, isDone}[]
+ */
 export const App: FC = () => {
-  
   const [todos, setTodos] = useState(todosModel);
 
-  const checkTodo = (todo: todoModelable) => {
+  const checkTodo: checkTodoable = (todo) => {
     // setStateは (prevState) => newState の形で書く
     setTodos(prevTodos => {
       // スプレッド構文でオブジェクトのコピーをとる
@@ -16,7 +25,7 @@ export const App: FC = () => {
       const pos = todos.map(todo => {
         return todo.id;
       }).indexOf(todo.id);
-      // トグル
+      // トグルする
       todos[pos].isDone = !todos[pos].isDone;
       
       return todos;

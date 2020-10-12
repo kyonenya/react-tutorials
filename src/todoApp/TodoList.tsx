@@ -1,10 +1,16 @@
 import React, { FC } from 'react';
 import ReactDOM from 'react-dom';
 
-import { /* todosModel, */todoModelable } from './todosModel';
 import { TodoItem } from './TodoItem';
+import { /* todosModel, */todoModelable } from './todosModel';
+import { checkTodoable } from './App';
 
-export const TodoList = (props: {todos: todoModelable[], checkTodo: (todo: todoModelable) => void}) => {
+/**
+ * 
+ * 
+ * 
+ */
+export const TodoList = (props: {todos: todoModelable[], checkTodo: checkTodoable}) => {
 
   const todos = props.todos.map(todo => {
     return (

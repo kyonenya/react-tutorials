@@ -2,8 +2,14 @@ import React, { FC, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { todoModelable } from './todosModel';
+import { checkTodoable } from './App';
 
-export const TodoItem = (props: {todo: todoModelable, checkTodo: (todo: todoModelable) => void}) => {
+/**
+ * 
+ * 
+ * 
+ */
+export const TodoItem = (props: {todo: todoModelable, checkTodo: checkTodoable}) => {
   return (
     <li key={props.todo.id}>
       <label>

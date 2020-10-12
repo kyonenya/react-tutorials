@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { todosModel } from './todosModel';
 import { TodoList } from './TodoList';
+/**
+ *
+ *
+ * @state todos: {id, title, isDone}[]
+ */
 export const App = () => {
     const [todos, setTodos] = useState(todosModel);
     const checkTodo = (todo) => {
@@ -11,7 +16,7 @@ export const App = () => {
             const pos = todos.map(todo => {
                 return todo.id;
             }).indexOf(todo.id);
-            // トグル
+            // トグルする
             todos[pos].isDone = !todos[pos].isDone;
             return todos;
         });

@@ -10,13 +10,13 @@ const compiler = webpack(config);
 const middleware = webpackMiddleware(compiler, {
   publicPath: config.output.publicPath,
   watchOptions: {
-  // 初回コンパイル後はファイルの変更を監視しない
-  ignored: '**'
+    // 初回コンパイル後はファイルの変更を監視しない
+    ignored: '**'
   },
 });
 app.use(middleware);
 
-// index.htmlをルーティング
+// index.htmlをルーティングする
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'index.html'));
 });
