@@ -21,7 +21,21 @@ export const App = () => {
             return todos;
         });
     };
+    const deleteTodo = (todo) => {
+        setTodos(prevTodos => {
+            // 確認をとる
+            if (!confirm('本当に削除しますか？')) {
+                return prevTodos;
+            }
+            // 浅いコピーをとる
+            const todos = prevTodos.slice();
+            const pos = prevTodos.indexOf(todo);
+            // 当該番目のTodoアイテムモデルを削除する
+            todos.splice(pos, 1);
+            return todos;
+        });
+    };
     return (React.createElement("div", null,
         React.createElement("h2", null, "My Todos"),
-        React.createElement(TodoList, { todos: todos, checkTodo: checkTodo })));
+        React.createElement(TodoList, { todos: todos, checkTodo: checkTodo, deleteTodo: deleteTodo })));
 };

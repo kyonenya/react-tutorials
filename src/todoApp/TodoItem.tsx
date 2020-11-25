@@ -2,14 +2,20 @@ import React, { FC, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { todoModelable } from './todosModel';
-import { checkTodoable } from './App';
+import { checkTodoable, deleteTodoable } from './App';
+
 
 /**
  * 
  * 
  * 
  */
-export const TodoItem = (props: {todo: todoModelable, checkTodo: checkTodoable}) => {
+type TodoItemProps = {
+  todo: todoModelable,
+  checkTodo: checkTodoable,
+  deleteTodo: deleteTodoable,
+}
+export const TodoItem = (props: TodoItemProps) => {
   return (
     <li key={props.todo.id}>
       <label>
@@ -20,8 +26,20 @@ export const TodoItem = (props: {todo: todoModelable, checkTodo: checkTodoable})
           // 引数にTodoアイテムモデル一個を持たせて親に渡す
           onChange={() => props.checkTodo(props.todo)}
         />
-        {props.todo.title}
+        {/* チェック済にのみcssクラスを適用 */}
+        <span 
+          className={props.todo.isDone ? 'done' : ''}
+        >
+          {props.todo.title}
+        </span>
       </label>
+      <span 
+        className="cmd"
+        /* 削除イベント */
+        onClick={() => props.deleteTodo(props.todo)}
+      >
+        [x]
+      </span>
     </li>
   );
 }

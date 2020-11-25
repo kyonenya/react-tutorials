@@ -3,14 +3,19 @@ import ReactDOM from 'react-dom';
 
 import { TodoItem } from './TodoItem';
 import { /* todosModel, */todoModelable } from './todosModel';
-import { checkTodoable } from './App';
+import { checkTodoable, deleteTodoable } from './App';
 
 /**
  * 
  * 
  * 
  */
-export const TodoList = (props: {todos: todoModelable[], checkTodo: checkTodoable}) => {
+type TodoListProps = {
+  todos: todoModelable[], 
+  checkTodo: checkTodoable,
+  deleteTodo: deleteTodoable,
+}
+export const TodoList = (props: TodoListProps) => {
 
   const todos = props.todos.map(todo => {
     return (
@@ -18,6 +23,7 @@ export const TodoList = (props: {todos: todoModelable[], checkTodo: checkTodoabl
         key={todo.id}
         todo={todo}
         checkTodo={props.checkTodo}
+        deleteTodo={props.deleteTodo}
       />
     );
   });
