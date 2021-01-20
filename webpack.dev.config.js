@@ -2,26 +2,26 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/hooks/index.tsx',
+  entry: './src/easy-mde/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),  // 絶対パス
     publicPath: '/dist/'  // 相対パス
   },
   module: {
-    rules: [{
-        // .tsxまたは.tsに対して、
+    rules: [
+      {
         test: /\.tsx?$/,
-        // ts-loaderを使う。
-        use: 'ts-loader',
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
       },
-//      {
-//        test: /\.css$/,
-//        use: [
-//          'style-loader',
-//          'css-loader',
-//        ],
-//      },
     ],
   },
   resolve: {

@@ -25,11 +25,12 @@ const rootDir = __dirname;
 app.use(express.static(rootDir));
 
 // ローカルサーバーを起動する
-const port = process.env['WEB_APP_PORT'];
+//const port = process.env['WEB_APP_PORT'];
+const port = 3000;
 app.listen(port, () => {
   console.log(`Launching app... http://localhost:${port}\n`);
 });
 
 // Register app and middleware. Required for better
 // performance when running from play.js
-try { pjs.register(app, webpackMiddleware); } catch (error) { }
+try { pjs.register(app, middleware); } catch (error) { console.log(error); }
