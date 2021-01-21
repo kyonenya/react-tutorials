@@ -7,6 +7,8 @@ export const MarkDownEditor = () => {
   
   return (
     <SimpleMDE
+      // @ts-ignore EasyMDEの型定義が壊れてる。togglePreview()はstaticメソッドなのだが、prototype拡張をしてインスタンスのメソッドに見せているため
+      getMdeInstance={(instance) => instance.togglePreview()}
       onChange={(txt) => {
         setText(txt);
         console.log(txt);
